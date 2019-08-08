@@ -10,12 +10,13 @@ public class TravelDeal {
     public TravelDeal(){}
 
     public TravelDeal(String title, String description, String price, String imageUrl ) {
-        this.setId(id);
+        this.setId(getId());
         this.setTitle(title);
         this.setDescription(description);
         this.setPrice(price);
         this.setImageUrl(imageUrl);
     }
+
 
     public String getId() {
         return id;

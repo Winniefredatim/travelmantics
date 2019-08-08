@@ -2,4 +2,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin_standard">16dp</dimen>
     <dimen name="text_margin_large">24dp</dimen>
+    <dimen name="text_price">18sp</dimen>
+    <string name="title_large">TextView</string>
 </resources>

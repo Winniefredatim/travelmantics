@@ -24,15 +24,13 @@ public class MainActivity extends AppCompatActivity {
     EditText txtTitle;
     EditText txtDescription;
     EditText txtPrice;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("traveldeals");
+        FirebaseUtil.openFbReference("traveldeals");
+        mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
+        mDatabaseReference = FirebaseUtil.mDatabaseReference;
         txtTitle = (EditText) findViewById(R.id.txtTitle);
         txtDescription = (EditText) findViewById(R.id.txtDescription);
         txtPrice = (EditText) findViewById(R.id.txtPrice);
@@ -53,21 +51,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.save_menu, menu);
         return true;
-    }
-
-    private void saveDeal() {
-        String title = txtTitle.getText().toString();
-        String description = txtDescription.getText().toString();
-        String price = txtPrice.getText().toString();
-        TravelDeal deal = new TravelDeal(title, description, price, "");
-        mDatabaseReference.push().setValue(deal);
-
-    }
-    private void clean() {
-        txtTitle.setText("");
-        txtPrice.setText("");
-        txtDescription.setText("");
-        txtTitle.requestFocus();
     }
 
     @Override
@@ -94,6 +77,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+    private void saveDeal() {
+        String title = txtTitle.getText().toString();
+        String description = txtDescription.getText().toString();
+        String price = txtPrice.getText().toString();
+        TravelDeal deal = new TravelDeal(title, description, price, "");
+        mDatabaseReference.push().setValue(deal);
+
+    }
+    private void clean() {
+        txtTitle.setText("");
+        txtPrice.setText("");
+        txtDescription.setText("");
+        txtTitle.requestFocus();
     }
 
 
